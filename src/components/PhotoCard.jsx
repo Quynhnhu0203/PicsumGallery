@@ -1,15 +1,14 @@
 // src/components/PhotoCard.jsx
 import { Link } from 'react-router-dom';
-import './PhotoCard.css'; // Nếu bạn muốn tách css riêng, không bắt buộc
+import './PhotoCard.css';
 
 function PhotoCard({ photo }) {
-  const { id, author, download_url } = photo;
+  const { id, author } = photo;
 
-  // Dùng phiên bản nhỏ hơn để grid load nhanh
   const thumbnailUrl = `https://picsum.photos/id/${id}/300/200`;
 
   return (
-    <div className="card h-100 shadow-sm">
+    <div className="card h-100 shadow-sm photo-card">
       <Link to={`/photos/${id}`} className="text-decoration-none text-dark">
         <img
           src={thumbnailUrl}
