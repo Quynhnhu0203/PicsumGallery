@@ -1,35 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import PhotoListPage from './pages/PhotoListPage';
+import PhotoDetailPage from './pages/PhotoDetailPage';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Router>
+      <Routes>
+        {/* Điều hướng / về /photos */}
+        <Route path="/" element={<Navigate to="/photos" replace />} />
+        <Route path="/photos" element={<PhotoListPage />} />
+        <Route path="/photos/:id" element={<PhotoDetailPage />} />
+        {/* 404 đơn giản */}
+        <Route
+          path="*"
+          element={
+            <div className="container py-5 text-center">
+              <h1 className="h3 mb-3">404 - Page not found</h1>
+              <p className="mb-3">The page you are looking for does not exist.</p>
+              <a href="/photos" className="btn btn-primary">
+                Go back to gallery
+              </a>
+            </div>
+          }
+        />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
